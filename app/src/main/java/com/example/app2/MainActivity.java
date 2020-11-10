@@ -3,6 +3,7 @@ package com.example.app2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -46,7 +47,22 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickHandler(View view) {
         Log.e(TAG, "clickHandler");
-        Intent hIntent=new Intent(MainActivity.this, HomeActivity.class);
+        Intent hIntent = new Intent(MainActivity.this,HomeActivity.class);
+        switch (view.getId()){
+            case R.id.button:
+                startHome();
+                break;
+            case R.id.button2:
+                Intent dialIntent =new Intent(Intent.ACTION_VIEW,  Uri.parse("tel:12345678" ));
+                //"//http://www.google.com"));
+                //new Intent(Intent.ACTION_DIAL, Uri.parse("tel:1234567"));
+                startActivity(dialIntent);
+                break;
+        }
+    }
+
+    private void startHome() {
+        Intent hIntent = new Intent(MainActivity.this, HomeActivity.class);
         hIntent.putExtra("mykey","megha");
         startActivity(hIntent);
 
