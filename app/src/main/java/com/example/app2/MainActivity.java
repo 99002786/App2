@@ -17,6 +17,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.i(TAG, "oncreate");
     }
+//    protected void onStart(){
+//
+//    }
 
     public void clickHandler(View view) {
         Log.e(TAG, "clickHandler");
