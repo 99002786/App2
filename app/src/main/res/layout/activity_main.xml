@@ -59,6 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="42dp"
         android:layout_marginLeft="42dp"
+        android:onClick="clickHandler"
         android:text="Cancel"
         app:layout_constraintBaseline_toBaselineOf="@+id/button"
         app:layout_constraintStart_toEndOf="@+id/button" />
