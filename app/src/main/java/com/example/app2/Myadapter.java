@@ -1,7 +1,10 @@
 package com.example.app2;
 
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class Myadapter extends RecyclerView.Adapter<Myadapter.wordViewHolder> {
     String[] languages;
-    public Myadapter(String[] languagesData) {
+    LayoutInflater layoutInflater;
+    public Myadapter(Context context,String[] languagesData) {
         languages=languagesData;
+        layoutInflater = LayoutInflater.from(context);
     }
 
     /**
@@ -24,7 +29,8 @@ public class Myadapter extends RecyclerView.Adapter<Myadapter.wordViewHolder> {
     @NonNull
     @Override
     public Myadapter.wordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View rowView=layoutInflater.inflate(R.layout.row_listview,parent,false);
+        return new wordViewHolder(rowView);
     }
 
     /**
@@ -35,7 +41,7 @@ public class Myadapter extends RecyclerView.Adapter<Myadapter.wordViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull Myadapter.wordViewHolder holder, int position) {
-
+        holder.titleTextView.setText(languages[position]);
     }
 
     /**
@@ -45,7 +51,7 @@ public class Myadapter extends RecyclerView.Adapter<Myadapter.wordViewHolder> {
 
     @Override
     public int getItemCount() {
-        return 0;
+        return languages.length;
     }
 
     /**
@@ -53,9 +59,10 @@ public class Myadapter extends RecyclerView.Adapter<Myadapter.wordViewHolder> {
      */
 
     public class wordViewHolder extends RecyclerView.ViewHolder {
-
+        public TextView titleTextView;
         public wordViewHolder(@NonNull View itemView) {
             super(itemView);
+            titleTextView = itemView.findViewById(R.id.textViewRow);
         }
     }
 }
