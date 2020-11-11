@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 public class AsyncActivity extends AppCompatActivity {
     private static final String TAG = AsyncActivity.class.getSimpleName();
     ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
