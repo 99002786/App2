@@ -4,14 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CursorAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import com.example.app2.database.DbAccessObj;
+import com.example.app2.database.FeedReaderContract;
 
 public class MainActivity<dbAccessObj> extends AppCompatActivity {
 
@@ -36,6 +41,17 @@ public class MainActivity<dbAccessObj> extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Log.i(TAG,"onStart");
+        ListView dbListView = findViewById(R.id.dblistview);
+        Cursor dataCursor = dbAccessObj.getRows();
+        //put the data into adapter
+        CursorAdapter adapter = new SimpleCursorAdapter(this,
+                R.layout.row_listview,
+                dataCursor,
+                new String[]{FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE, FeedReaderContract.FeedEntry.COLUMN_NAME_SUBTITLE},
+                //"title","subtitle"},
+                new int[] {R.id.textviewRow,R.id.textViewsubtitle});
+        //set the adapter onto the listview
+        dbListView.setAdapter(adapter);
     }
     public void handleDb(View view) {
         switch (view.getId()){

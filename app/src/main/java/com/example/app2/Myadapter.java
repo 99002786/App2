@@ -62,7 +62,7 @@ public class Myadapter extends RecyclerView.Adapter<Myadapter.wordViewHolder> {
         public TextView titleTextView;
         public wordViewHolder(@NonNull View itemView) {
             super(itemView);
-            titleTextView = itemView.findViewById(R.id.textViewRow);
+            titleTextView = itemView.findViewById(R.id.textviewRow);
         }
     }
 }
