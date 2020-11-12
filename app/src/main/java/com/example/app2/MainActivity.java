@@ -31,6 +31,14 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         Log.i(TAG,"onStart");
     }
+    public void handleDb(View view) {
+        switch (view.getId()){
+            case R.id.buttonput:
+                break;
+            case R.id.buttonget:
+                break;
+        }
+    }
 
     @Override
     protected void onPause() {
