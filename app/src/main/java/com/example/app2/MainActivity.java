@@ -127,7 +127,8 @@ public class MainActivity<dbAccessObj> extends AppCompatActivity {
         Intent hIntent = new Intent(MainActivity.this,HomeActivity.class);
         switch (view.getId()){
             case R.id.button:
-                startHome();
+                //startHome();
+                getCredentials();
                 break;
             case R.id.button2:
                 Intent dialIntent =new Intent(Intent.ACTION_VIEW,  Uri.parse("tel:12345678" ));
@@ -136,6 +137,11 @@ public class MainActivity<dbAccessObj> extends AppCompatActivity {
                 startActivity(dialIntent);
                 break;
         }
+    }
+
+    private void getCredentials() {
+        String pwd = dbAccessObj.query(nameEditText.getText().toString());
+        pwdEditText.setText(pwd);
     }
 
     private void startHome() {

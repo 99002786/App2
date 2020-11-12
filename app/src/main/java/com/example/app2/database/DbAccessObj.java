@@ -44,4 +44,21 @@ public class DbAccessObj {
         return cursor;
     }
 
+    public String query(String queryParam) {
+        String table = FeedReaderContract.FeedEntry.TABLE_NAME;
+        String[] columns = {FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE, FeedReaderContract.FeedEntry.COLUMN_NAME_SUBTITLE}; //projection = columns
+        String selection = FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE +" =?"; //selection = rows
+        String[] selectionArgs = {queryParam};
+        String groupBy = null;
+        String having = null;
+        String orderBy = FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE+" DESC";
+        String limit = "10";
+
+        Cursor cursor = database.query(table, columns, selection, selectionArgs, groupBy, having, orderBy, limit);
+        int subtitleIndex = cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_SUBTITLE);
+        cursor.moveToLast();
+        String subtitle = cursor.getString(subtitleIndex);
+        return subtitle;
+
+    }
 }
