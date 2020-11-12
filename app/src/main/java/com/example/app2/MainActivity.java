@@ -9,13 +9,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.app2.database.DbAccessObj;
+
+public class MainActivity<dbAccessObj> extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     public static final String MYPREFS = "myprefs";
     public static final String NAMEKEY = "namekey";
     public static final String PWDKEY = "pwdkey";
+    DbAccessObj dbAccessObj;
     EditText nameEditText,pwdEditText;
 
     @Override
@@ -25,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "oncreate");
         nameEditText =  findViewById(R.id.editTextTextPersonName);
         pwdEditText = findViewById(R.id.editTextPwd);
+        dbAccessObj = new DbAccessObj(this);
+        dbAccessObj.openDb();
     }
     @Override
     protected void onStart() {
@@ -34,8 +40,17 @@ public class MainActivity extends AppCompatActivity {
     public void handleDb(View view) {
         switch (view.getId()){
             case R.id.buttonput:
+                String title = nameEditText.getText().toString();
+                String subtitle = pwdEditText.getText().toString();
+
+                dbAccessObj.createRow(title,subtitle);
                 break;
             case R.id.buttonget:
+                //get the data from db
+                String data =  dbAccessObj.readRow();
+                //set the data onto textview
+                TextView dbTextView = findViewById(R.id.textViewdb);
+                dbTextView.setText(data);
                 break;
         }
     }
